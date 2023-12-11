@@ -1,0 +1,53 @@
+[
+    {
+      "user_id": 1,
+      "username": "elijah",
+      "password": "elijah123",
+      "firstName": "Elijah",
+      "lastName": "Kahn-Ihejiere",
+      "email": "goatedeli@gmail.com",
+      "role": "Admin",
+      "watchlist": {
+        "user_id": 1,
+        "media_type": "tv",
+        "media_id": 61709
+      },
+      "reviews": {
+        "review_id": 1
+        }
+    },
+    {
+        "user_id": 2,
+        "username": "dejah",
+        "password": "dejah123",
+        "firstName": "Dejah",
+        "lastName": "Gadsden",
+        "email": "dejahg10@gmail.com",
+        "role": "Admin",
+        "watchlist": {
+            "user_id": 2,
+            "media_type": "tv",
+            "media_id": 61709
+          },
+          "reviews": {
+            "review_id": 2
+            }
+      },
+      {
+        "user_id": 3,
+        "username": "axel",
+        "password": "axel123",
+        "firstName": "Axel",
+        "lastName": "Boly",
+        "email": "bolyael@gmail.com",
+        "role": "Admin",
+        "watchlist": {
+            "user_id": 3,
+            "media_type": "tv",
+            "media_id": 61709
+          },
+          "reviews": {
+            "review_id": 3
+            }
+      }
+  ]

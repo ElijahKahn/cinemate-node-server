@@ -1,0 +1,34 @@
+[
+  {
+    "review_id": 1,
+    "author": "Elijah Kahn-Ihejiere",
+    "username": "elijah",
+    "content": "Best anime I've ever seen!",
+    "movie_id": 61709
+  },
+  {
+    "review_id": 2,
+    "author": "Dejah Gadsden",
+    "username": "dejah",
+    "content": "GOAT!",
+    "movie_id": 61709
+  },
+  {
+    "review_id": 3,
+    "author": "Axel Boly",
+    "username": "axel",
+    "content": "Top 2 Not 2!",
+    "movie_id": 61709
+  },
+  
+  {
+    "_id": {
+      "$oid": "657669adf903a01d64316b1e"
+    },
+    "review_id": 4,
+    "author": "Dejah Gadsden",
+    "username": "dejah",
+    "content": "Never seen! BOOM",
+    "movie_id": 872585
+  }
+]
