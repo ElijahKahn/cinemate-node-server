@@ -12,9 +12,6 @@ const userSchema = new mongoose.Schema({
       watchlist: [{
         media_id: Number,
         media_type: String,
-      }],
-      review: [{
-        review_id: Number,
       }]
   },
   { collection: "users" });

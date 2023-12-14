@@ -3,7 +3,9 @@ import cors from "cors";
 import mongoose from "mongoose";
 import UserRoutes from "./users/routes.js";
 import ReviewRoutes from "./reviews/routes.js";
-import session from "express-session";
+import session from 'express-session';
+import "dotenv/config";
+import ReviewsRoutes from './reviews/routes.js';
 
 
 mongoose.connect("mongodb://127.0.0.1:27017/cinemate");
@@ -12,7 +14,7 @@ app.use(
     cors({
       credentials: true,
       origin: "http://localhost:3000",
-      // origin: process.env.FRONTEND_URL
+      origin: process.env.FRONTEND_URL
     })
    );
 
@@ -32,8 +34,9 @@ app.use(
 
 app.use(express.json());
 UserRoutes(app);
-ReviewRoutes(app);
-app.listen(4000);
+ReviewsRoutes(app);
+app.listen(process.env.PORT || 4000);
+
 
 
 

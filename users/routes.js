@@ -25,9 +25,6 @@ function UserRoutes(app) {
   const updateUser = async (req, res) => {
     const { userId } = req.params;
     const status = await dao.updateUser(userId, req.body);
-    const currentUser = await dao.findUserById(userId);
-    req.session["currentUser"] = currentUser;
-
     res.json(status);
   };
   const signup = async (req, res) => {
@@ -46,64 +43,43 @@ function UserRoutes(app) {
     if (!currentUser) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
+
     req.session["currentUser"] = currentUser;
     res.json(currentUser);
   };
-  
+
   const signout = (req, res) => {
     req.session.destroy();
     res.json(200);
   };
 
   const account = async (req, res) => {
+    console.log("Session:", req.session);
+
     res.json(req.session["currentUser"]);
   };
 
-//   app.post('/api/profile/watchlist/add', async (req, res) => {
-//     const { userId, mediaItem } = req.body; 
+  // Endpoint to add to watchlist
+  const addWatchlist = async (req, res) => {
+    const { userId } = req.params;
+    const media = req.body;
+    const status = await dao.addToWatchlist(userId, media);
+    res.json(status);
+  };
 
-//     try {
-//         await User.updateOne(
-//             { _id: userId },
-//             { $push: { watchlist: mediaItem } }
-//         );
-//         res.status(200).send('Added to watchlist');
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send('Server error');
-//     }
-// });
+// Endpoint to get watchlist
+ const getWatchlist = async (req, res) => {
+  const { userId } = req.params;
+  const watchlist = await dao.getWatchlist(userId);
+  res.json(watchlist);
+};
 
-
-// app.post('/api/profile/watchlist/remove', async (req, res) => {
-//   const { userId, mediaId } = req.body;
-
-//   try {
-      
-//       await User.updateOne(
-//           { _id: userId },
-//           { $pull: { watchlist: { media_id: mediaId } } }
-//       );
-//       res.status(200).send('Removed from watchlist');
-//   } catch (error) {
-//       console.error(error);
-//       res.status(500).send('Server error');
-//   }
-// });
-
-
-// app.get('/api/profile/watchlist/:userId', async (req, res) => {
-//   const userId = req.params.userId;
-
-//   try {
-//       const user = await User.findById(userId);
-//       res.status(200).json(user.watchlist);
-//   } catch (error) {
-//       console.error(error);
-//       res.status(500).send('Server error');
-//   }
-// });
-
+// Endpoint to remove from watchlist
+const deleteWatchlist = async (req, res) => {
+  const { userId, mediaId } = req.params;
+  const status = await dao.removeFromWatchlist(userId, mediaId);
+  res.json(status);
+};
 
   app.post("/api/users", createUser);
   app.get("/api/users", findAllUsers);
@@ -113,6 +89,9 @@ function UserRoutes(app) {
   app.post("/api/users/signup", signup);
   app.post("/api/users/signin", signin);
   app.post("/api/users/signout", signout);
-  app.post("/api/users/account", account);
+  app.post("/api/users/account", account)
+  app.post("/api/users/:userId/watchlist", addWatchlist);
+  app.get("/api/users/:userId/watchlist", getWatchlist);
+  app.delete("/api/users/:userId/watchlist/:mediaId", deleteWatchlist)
 }
 export default UserRoutes;
